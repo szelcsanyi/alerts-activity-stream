@@ -1,0 +1,9 @@
+# Example configuration file for Alert activity stream
+
+# Pusher.com application settings
+APP_ID='25413'
+KEY='f137343dd2f4566c66365'
+SECRET='1af2834a262b3431734fb'
+
+# sqlite database path
+DB_PATH='/tmp/alerts.db'
