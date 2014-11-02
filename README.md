@@ -31,7 +31,7 @@ import json
 import request
 url = 'http://activityserver/send'
 payload = {'type': 'error', 
-'message': 'Low disk spave in /', 
+'message': 'Low disk space in /', 
 'severity': '2', 'group': 'sysop'}
 r = requests.post(url, data=json.dumps(payload))
 </pre>
