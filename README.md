@@ -53,28 +53,28 @@ socket = 127.0.0.1:3031
 
 - Apache2
 <pre>
-<VirtualHost *:80>
+&lt;VirtualHost *:80&gt;
     ServerName alerts.yourdomain
 
     DocumentRoot /path/to/alerts-activity-stream/alerts-activity-stream
 
-    <Directory /path/to/alerts-activity-stream/alerts-activity-stream>
+    &lt;Directory /path/to/alerts-activity-stream/alerts-activity-stream&gt;
         Options Indexes FollowSymLinks MultiViews
         AllowOverride None
         Order allow,deny
         allow from all
-    </Directory>
+    &lt;/Directory&gt;
 
-    <Location />
+    &lt;Location /&gt;
         Options FollowSymLinks Indexes
         SetHandler uwsgi-handler
         uWSGISocket 127.0.0.1:3031
-    </Location>
+    &lt;/Location&gt;
 
-    <Location /static>
+    &lt;Location /static&gt;
         SetHandler none
-    </Location>
-</VirtualHost>
+    &lt;/Location&gt;
+&lt;/VirtualHost&gt;
 </pre>
 
 - Nginx
