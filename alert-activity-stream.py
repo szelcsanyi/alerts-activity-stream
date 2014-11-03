@@ -13,7 +13,7 @@ __version__ = "1.0.0"
 __maintainer__ = "Gabor Szelcsanyi"
 __email__ = "szelcsanyi.gabor@gmail.com"
 
-from bottle import route, run, template, request, HTTPError, error, install, static_file
+from bottle import route, run, template, request, HTTPError, error, install, static_file, default_app, abort
 import bottle.ext.sqlite
 import pusher
 import hashlib
@@ -37,6 +37,7 @@ def error404(error):
 
 @route('/')
 def main(db):
+	db.execute("CREATE TABLE if not exists Alerts(Id TEXT, Message TEXT, Severity INT, AlertGroup TEXT, AlertDate DATETIME, PRIMARY KEY (Id) )")
 	return template('templates/main', groups=get_groups(db) )
 
 @route('/alerts/<group>')
@@ -53,11 +54,12 @@ def send(db):
 
 	id = hashlib.md5(message + severity + group).hexdigest()
 
-	db.execute("CREATE TABLE if not exists Alerts(Id TEXT, Message TEXT, Severity INT, AlertGroup TEXT, AlertDate DATETIME, PRIMARY KEY (Id) )")
-
 	date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	if errortype == "error":
-		db.execute("INSERT INTO Alerts VALUES(?,?,?,?,?)", (id, message, severity, group, date))
+		try:
+			db.execute("INSERT INTO Alerts VALUES(?,?,?,?,?)", (id, message, severity, group, date))
+		except:
+			return HTTPError(500, "Adding alert failed!")
 	elif errortype == "recovery":
 		db.execute("DELETE FROM Alerts WHERE Id=?", [id] )
 	else:

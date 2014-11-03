@@ -17,18 +17,17 @@ Post json data with proper information. An alert popup will be displayed on the 
 Curl:
 <pre>
 curl -H 'Content-Type: application/json' \
--d '{"data":"{
- \"message\":\"Low disk space in /\",
- \"type\":\"error\",
- \"severity\":\"2\",
- \"group\":\"sysop\"}' \
+-d {"type":"error",
+"message":"Low disk space in /",
+"severity":"4",
+"group":"sysop"} \
  http://activityserver/send
 </pre>
 
-Python
+Python:
 <pre>
 import json
-import request
+import requests
 url = 'http://activityserver/send'
 payload = {'type': 'error', 
 'message': 'Low disk space in /', 
@@ -36,8 +35,71 @@ payload = {'type': 'error',
 r = requests.post(url, data=json.dumps(payload))
 </pre>
 
-## TODO
-- WSGI config examples
+## uWSGI example
+- uwsgi - alerts.ini
+<pre>
+[uwsgi]
+vhost = true
+plugins = python
+master = true
+enable-threads = true
+processes = 2
+wsgi-file = /path/to/alerts-activity-stream/alert-activity-stream.py
+virtualenv = /path/to/alerts-activity-stream
+chdir = /path/to/alerts-activity-stream/alerts-activity-stream
+touch-reload = /path/to/alerts-activity-stream/reload
+socket = 127.0.0.1:3031
+</pre>
+
+- Apache2
+<pre>
+<VirtualHost *:80>
+    ServerName alerts.yourdomain
+
+    DocumentRoot /path/to/alerts-activity-stream/alerts-activity-stream
+
+    <Directory /path/to/alerts-activity-stream/alerts-activity-stream>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride None
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    <Location />
+        Options FollowSymLinks Indexes
+        SetHandler uwsgi-handler
+        uWSGISocket 127.0.0.1:3031
+    </Location>
+
+    <Location /static>
+        SetHandler none
+    </Location>
+</VirtualHost>
+</pre>
+
+- Nginx
+<pre>
+server {
+        listen   80;
+        index index.html;
+
+        rewrite_log on;
+        autoindex off;
+
+        server_name alerts.yourdomain;
+
+        location /static/ {
+            alias /path/to/static/;
+            expires max;
+            log_not_found off;
+        }
+
+        location / {
+                uwsgi_pass  127.0.0.1:3031;
+                include     uwsgi_params;
+        }
+}
+</pre>
 
 ## Contributing
 

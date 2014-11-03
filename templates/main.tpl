@@ -29,11 +29,10 @@
 		<div class="panel-body">
 			<pre>
 curl -H 'Content-Type: application/json' \
--d '{"data":"{
- \"message\":\"Low disk space in /\",
- \"type\":\"error\",
- \"severity\":\"2\",
- \"group\":\"sysop\"}' \
+-d {"type":"error",
+"message":"Low disk space in /",
+"severity":"4",
+"group":"sysop"} \
  http://activityserver/send
 	      	</pre>
 		</div>
@@ -64,7 +63,7 @@ curl -H 'Content-Type: application/json' \
 		<div class="panel-body">
 			<pre>
 import json
-import request
+import requests
 url = 'http://activityserver/send'
 payload = {'type': 'error', 
 'message': 'Low disk spave in /', 
