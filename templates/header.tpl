@@ -33,7 +33,7 @@
 		-moz-background-size: cover;
 		background-size: cover;
 		-o-background-size: cover;
-		padding-top: 80px;
+		padding-top: 60px;
 	}
 	</style>
 
@@ -42,7 +42,7 @@
 <body>
     <div class="clock" style="position: fixed; bottom: 0;"></div>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
+      <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -62,4 +62,4 @@
       </div>
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">

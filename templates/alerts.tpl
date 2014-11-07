@@ -1,6 +1,6 @@
 % include('templates/header.tpl', title='Alerts for '+group, groups=groups )
 
-  <div id="alertbox" style="height: 90vh; position: relative; overflow: auto;">
+  <div id="alertbox" style="height: 80vh; position: relative; overflow: auto;">
   </div>
 
   % if alerts:
