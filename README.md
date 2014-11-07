@@ -50,10 +50,12 @@ r = requests.post(url, data=json.dumps(payload))
 #### Config examples
 
 ##### config.py
+<pre>
 APP_ID='pusher app id'
 KEY='pusher app key'
 SECRET='pusher app secret'
 DB_PATH='/path/to/sqlite.db'
+</pre>
 
 ##### uwsgi - alerts.ini
 <pre>
