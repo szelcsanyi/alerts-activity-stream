@@ -122,6 +122,7 @@ server {
 
 ## Thanks to
 - [Pusher.com](https://pusher.com/) for real-time push notification service
+- [jQuery](http://jquery.com/) for javascript library
 - [PNotify](http://sciactive.github.io/pnotify/) for awesome javascript notifications
 - [FlipClock.js](http://flipclockjs.com/) for nice clock solution
 - [Bootstrap](http://getbootstrap.com/) for framework

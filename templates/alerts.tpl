@@ -6,7 +6,7 @@
   % if alerts:
   <script type="text/javascript">
   var notices = [];
-  var stack = {"dir1": "down", "dir2": "right", "push": "top", "context": $("#alertbox")};
+  var stack = {"dir1": "right", "dir2": "down", "push": "top", "context": $("#alertbox")};
   function messageBox(id, message, severity, date){
   	
   	var opts = {
